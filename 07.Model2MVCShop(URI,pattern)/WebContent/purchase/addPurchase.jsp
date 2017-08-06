@@ -9,7 +9,7 @@
 
 <body>
 
-<form name="updatePurchase" action="/updatePurchaseView.do?tranNo=${purchase.tranNo }" method="post">
+<form name="updatePurchase" action="/updatePurchaseView?tranNo=${purchase.tranNo }" method="post">
 <input type="hidden" name="menu" value="${param.menu }" />
 
 

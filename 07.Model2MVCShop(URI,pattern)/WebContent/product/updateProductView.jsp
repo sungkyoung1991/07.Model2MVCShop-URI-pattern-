@@ -41,7 +41,7 @@ function fncAddProduct(){
 		return;
 	}
 		
-	document.detailForm.action='/updateProduct.do';
+	document.detailForm.action='/updateProduct';
 	document.detailForm.submit();
 }
 
@@ -162,7 +162,7 @@ function fncAddProduct(){
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
 						<a href="javascript:fncAddProduct();">수정</a>
-						<%-- <a href="/updateProduct.do?prodNo=${product.prodNo}&menu=${param.menu}">수정</a> --%>
+						<%-- <a href="/updateProduct?prodNo=${product.prodNo}&menu=${param.menu}">수정</a> --%>
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>

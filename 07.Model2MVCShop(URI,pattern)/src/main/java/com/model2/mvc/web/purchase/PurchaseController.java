@@ -59,12 +59,12 @@ public class PurchaseController {
 	@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 
-	@RequestMapping("/addPurchaseView.do")
+	@RequestMapping("/addPurchaseView")
 
 	public String addPurchaseView(@ModelAttribute("purchase") Purchase purchase, @RequestParam("prodNo") int prodNo,
 			Model model) throws Exception {
 
-		System.out.println("addPurchaseView.do start..................");
+		System.out.println("addPurchaseView start..................");
 
 		// product.setProTranCode(tranCode);
 		Product product = productService.getProduct(prodNo);
@@ -77,11 +77,11 @@ public class PurchaseController {
 
 	}
 
-	@RequestMapping("/addPurchase.do")
+	@RequestMapping("/addPurchase")
 	public String addPurchase(@ModelAttribute("purchase") Purchase purchase, @RequestParam("prodNo") int prodNo,
 			@RequestParam("buyerId") String buyerId, Model model) throws Exception {
 
-		System.out.println("/addPurchase.do");
+		System.out.println("/addPurchase");
 
 		// purchase.getPurchaseProd().setProTranCode(purchase.getTranCode());
 
@@ -98,14 +98,14 @@ public class PurchaseController {
 		return "forward:/purchase/addPurchase.jsp";
 	}
 
-	@RequestMapping("/getPurchase.do")
+	@RequestMapping("/getPurchase")
 	public String getPurchase(@RequestParam("tranNo") int tranNo, // @RequestParam("prodNo")
 																	// int
 																	// prodNo,
 			// @RequestParam("menu") String menu,
 			Model model) throws Exception {
 
-		System.out.println("/getPurchase.do");
+		System.out.println("/getPurchase");
 
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 
@@ -116,10 +116,10 @@ public class PurchaseController {
 
 	}
 
-	@RequestMapping("/updatePurchaseView.do")
+	@RequestMapping("/updatePurchaseView")
 	public String updatePurchaseView(@RequestParam("tranNo") int tranNo, Model model) throws Exception {
 
-		System.out.println("/updatePurchaseView.do");
+		System.out.println("/updatePurchaseView");
 
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 
@@ -128,11 +128,11 @@ public class PurchaseController {
 		return "forward:/purchase/updatePurchaseView.jsp";
 	}
 
-	@RequestMapping("/updatePurchase.do")
+	@RequestMapping("/updatePurchase")
 	public String updatePurchase(@ModelAttribute("purchase") Purchase purchase, @RequestParam("tranNo") int tranNo,
 			HttpServletRequest request, Model model) throws Exception {
 
-		System.out.println("/updatePurchase.do");
+		System.out.println("/updatePurchase");
 
 		purchase.setDivyDate(purchase.getDivyDate().replaceAll("-", ""));
 
@@ -148,11 +148,11 @@ public class PurchaseController {
 		return "forward:/purchase/updatePurchase.jsp";
 	}
 
-	@RequestMapping("/listPurchase.do")
+	@RequestMapping("/listPurchase")
 	public String getPurchaseList(@ModelAttribute("search") Search search, @ModelAttribute("page") Page page,
 			HttpServletRequest request, Model model) throws Exception {
 
-		System.out.println("/listPurchase.do");
+		System.out.println("/listPurchase");
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
@@ -174,7 +174,7 @@ public class PurchaseController {
 		return "forward:/purchase/listPurchase.jsp?menu=search";
 	}
 
-	@RequestMapping("/updateTranCode.do")
+	@RequestMapping("/updateTranCode")
 	public String updateTranCode(@ModelAttribute("purchase") Purchase purchase,
 			@RequestParam("tranCode") String tranCode, @RequestParam("prodNo") int prodNo,
 			@RequestParam("menu") String menu, Model model) throws Exception {
@@ -203,9 +203,9 @@ public class PurchaseController {
 		//model.addAttribute("product", product);
 
 		if (menu.equals("manage")) {
-			return "forward:listProduct.do?menu=manage";
+			return "forward:listProduct?menu=manage";
 		} else {
-			return "forward:listPurchase.do";
+			return "forward:listPurchase";
 		}
 
 	}

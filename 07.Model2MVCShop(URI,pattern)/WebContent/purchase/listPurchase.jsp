@@ -20,7 +20,7 @@
 
 <div style="width: 98%; margin-left: 10px;">
 
-<form name="detailForm" action="/listPurchase.do" method="post">
+<form name="detailForm" action="/listPurchase" method="post">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -96,7 +96,7 @@
 		</td>
 		<td align="left"><td align="left">
 		<c:if test="${purchase.tranCode=='1  '}">
-		<a href="/getPurchase.do?tranNo=${purchase.tranNo}&prodNo=${purchase.purchaseProd.prodNo}">정보수정하기</a></td>
+		<a href="/getPurchase?tranNo=${purchase.tranNo}&prodNo=${purchase.purchaseProd.prodNo}">정보수정하기</a></td>
 		</c:if>
 		<c:if test="${purchase.tranCode!='1  '}">
 		수정불가.
@@ -110,7 +110,7 @@
  			대기
 		</c:if>
 		<c:if test="${purchase.tranCode=='2  '}">
-<a href="/updateTranCode.do?tranNo=${purchase.tranNo}&prodNo=${purchase.purchaseProd.prodNo}&tranCode=${purchase.tranCode}&menu=${param.menu}"> 상품수령 </a></td>
+<a href="/updateTranCode?tranNo=${purchase.tranNo}&prodNo=${purchase.purchaseProd.prodNo}&tranCode=${purchase.tranCode}&menu=${param.menu}"> 상품수령 </a></td>
 		</c:if>
 		<c:if test="${purchase.tranCode=='3  '}">
 		상품수령완료

@@ -19,7 +19,7 @@
 
 function fncUpdatePurchase(){
 
-	document.detailForm.action='/updatePurchase.do';
+	document.detailForm.action='/updatePurchase';
 	document.detailForm.submit();
 }
 </script>

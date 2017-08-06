@@ -45,10 +45,10 @@ public class ProductController {
 	int pageSize;
 
 	@Test
-	@RequestMapping("/addProduct.do")
+	@RequestMapping("/addProduct")
 	public ModelAndView addProduct(@ModelAttribute("product") Product product) throws Exception {
 
-		System.out.println("/addProduct.do");
+		System.out.println("/addProduct");
 
 		product.setManuDate(product.getManuDate().replaceAll("-", ""));
 
@@ -61,11 +61,11 @@ public class ProductController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/getProduct.do")
+	@RequestMapping("/getProduct")
 	public ModelAndView getProduct(@RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo)
 			throws Exception {
 
-		System.out.println("/getProduct.do");
+		System.out.println("/getProduct");
 		// Business Logic
 
 		Product product = productService.getProduct(prodNo);
@@ -87,10 +87,10 @@ public class ProductController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/updateProductView.do")
+	@RequestMapping("/updateProductView")
 	public ModelAndView updateProductView(@RequestParam("prodNo") int prodNo) throws Exception {
 
-		System.out.println("/updateProductView.do");
+		System.out.println("/updateProductView");
 
 		Product product = productService.getProduct(prodNo);
 
@@ -101,11 +101,11 @@ public class ProductController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/updateProduct.do")
+	@RequestMapping("/updateProduct")
 	public ModelAndView updateProduct(@ModelAttribute("product") Product product, @RequestParam("menu") String menu)
 			throws Exception {
 
-		System.out.println("/updateProduct.do");
+		System.out.println("/updateProduct");
 
 		System.out.println("update menu Check" + menu);
 
@@ -122,11 +122,11 @@ public class ProductController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/listProduct.do")
+	@RequestMapping("/listProduct")
 	public ModelAndView getProductList(@ModelAttribute("search") Search search, @ModelAttribute("page") Page page)
 			throws Exception {
 
-		System.out.println("/listProduct.do");
+		System.out.println("/listProduct");
 
 		if (search.getCurrentPage() == 0) {
 			search.setCurrentPage(1);
