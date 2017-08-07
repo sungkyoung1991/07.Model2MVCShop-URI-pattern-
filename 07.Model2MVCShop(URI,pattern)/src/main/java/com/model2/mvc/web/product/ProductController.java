@@ -44,7 +44,7 @@ public class ProductController {
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 
-	@Test
+	//@Test
 	@RequestMapping("/addProduct")
 	public ModelAndView addProduct(@ModelAttribute("product") Product product) throws Exception {
 
