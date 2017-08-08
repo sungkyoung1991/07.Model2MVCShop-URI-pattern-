@@ -8,7 +8,7 @@
 <html>
 <head>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+<link rel="stylesheet" href="/css/admin.css" enctype="multipart/form-data">
 
 <title>Insert title here</title>
 </head>
@@ -70,7 +70,7 @@
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<img src = "/images/uploadFiles/../../images/empty.GIF"/>
+			<img src = "../images/uploadFiles/${product.fileName }"/>
 		</td>
 	</tr>
 	<tr>

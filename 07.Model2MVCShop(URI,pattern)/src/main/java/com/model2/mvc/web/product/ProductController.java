@@ -1,14 +1,23 @@
 package com.model2.mvc.web.product;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
-import org.junit.Test;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.DiskFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,8 +25,6 @@ import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
-
-import junit.framework.Assert;
 
 //==> 회원관리 Controller
 @Controller
@@ -45,7 +52,7 @@ public class ProductController {
 	int pageSize;
 
 	//@Test
-	@RequestMapping("/addProduct")
+	/*@RequestMapping("/addProduct")
 	public ModelAndView addProduct(@ModelAttribute("product") Product product) throws Exception {
 
 		System.out.println("/addProduct");
@@ -59,7 +66,81 @@ public class ProductController {
 		modelAndView.setViewName("forward:/product/addProduct.jsp");
 
 		return modelAndView;
+	}*/
+	
+	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
+	public ModelAndView addProduct(@ModelAttribute("product") Product product, HttpServletRequest request)
+			throws Exception {
+
+
+		System.out.println("/addProduct");
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		if (FileUpload.isMultipartContent(request)) {
+			String temDir = "/Users/sungkyoung-kim/git/07.Model2MVCShop(URI,pattern)/"
+					+ "07.Model2MVCShop(URI,pattern)/WebContent/images/uploadFiles";
+
+			DiskFileUpload fileUpload = new DiskFileUpload();
+			fileUpload.setRepositoryPath(temDir);
+			fileUpload.setSizeMax(1024 * 1024 * 10);
+
+			fileUpload.setSizeThreshold(1024 * 100);
+
+			if (request.getContentLength() < fileUpload.getSizeMax()) {
+				StringTokenizer token = null;
+				List fileItemList = fileUpload.parseRequest(request);
+				int Size = fileItemList.size();
+				for (int i = 0; i < Size; i++) {
+					FileItem fileItem = (FileItem) fileItemList.get(i);
+					if (fileItem.isFormField()) {
+						if (fileItem.getFieldName().equals("manuDate")) {
+							token = new StringTokenizer(fileItem.getString("euc-kr"), "-");
+							String manuDate = token.nextToken() + token.nextToken() + token.nextToken();
+							product.setManuDate(manuDate);
+						} else if (fileItem.getFieldName().equals("prodName"))
+							product.setProdName(fileItem.getString("euc-kr"));
+						else if (fileItem.getFieldName().equals("prodDetail"))
+							product.setProdDetail(fileItem.getString("euc-kr"));
+						else if (fileItem.getFieldName().equals("price"))
+							product.setPrice(Integer.parseInt(fileItem.getString("euc-kr")));
+
+					} else {
+						if (fileItem.getSize() > 0) {
+							int idx = fileItem.getName().lastIndexOf("\\");
+							if (idx == -1) {
+								idx = fileItem.getName().lastIndexOf("/");
+
+							}
+							String fileName = fileItem.getName().substring(idx + 1);
+							product.setFileName(fileName);
+							try {
+								File UploadedFile = new File(temDir, fileName);
+								fileItem.write(UploadedFile);
+							} catch (IOException e) {
+								System.out.println(e);
+							}
+						}
+					}
+				}
+				productService.addProduct(product);
+				modelAndView.addObject("product", product);
+				modelAndView.setViewName("forward:/product/addProduct.jsp");
+			} else {
+				int overSize = (request.getContentLength() / 1000000);
+				System.out.println("<script>alert('파일의 크기는 1MB 까지입니다. 올리신 파일용량은 " + overSize + "MB입니다');");
+
+			}
+		} else {
+			System.out.println("인코딩 타입이 multipart/form-data가 아닙니다.");
+		}
+		modelAndView.setViewName("forward:/product/addProduct.jsp");
+
+		return modelAndView;
 	}
+
+	
+	
 
 	@RequestMapping("/getProduct")
 	public ModelAndView getProduct(@RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo)
@@ -102,12 +183,12 @@ public class ProductController {
 	}
 
 	@RequestMapping("/updateProduct")
-	public ModelAndView updateProduct(@ModelAttribute("product") Product product, @RequestParam("menu") String menu)
+	public ModelAndView updateProduct(@ModelAttribute("product") Product product /*@RequestParam("menu") String menu*/)
 			throws Exception {
 
 		System.out.println("/updateProduct");
 
-		System.out.println("update menu Check" + menu);
+		//System.out.println("update menu Check" + menu);
 
 		product.setManuDate(product.getManuDate().replaceAll("-", ""));
 
@@ -117,7 +198,7 @@ public class ProductController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/product/updateProduct.jsp");
 		modelAndView.addObject("product", product);
-		modelAndView.addObject("menu", menu);
+		//modelAndView.addObject("menu", menu);
 
 		return modelAndView;
 	}
