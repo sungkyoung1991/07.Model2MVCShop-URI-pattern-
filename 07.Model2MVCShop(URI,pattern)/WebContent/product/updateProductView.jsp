@@ -50,7 +50,7 @@ function fncAddProduct(){
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="detailForm" method="post" enctype="multipart/form-data" >
+<form name="detailForm" method="post"  >
 
 <input type="hidden" name="prodNo" value= "${product.prodNo }"/>
 <input type="hidden" name="menu" value= "${param.menu }"/>
@@ -78,6 +78,7 @@ function fncAddProduct(){
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
+	${param.menu }
 	<tr>
 		<td width="104" class="ct_write">
 			ªÛ«∞∏Ì <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>

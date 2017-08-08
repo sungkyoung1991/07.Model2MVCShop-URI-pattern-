@@ -183,12 +183,14 @@ public class ProductController {
 	}
 
 	@RequestMapping("/updateProduct")
-	public ModelAndView updateProduct(@ModelAttribute("product") Product product /*@RequestParam("menu") String menu*/)
+	public ModelAndView updateProduct(@ModelAttribute("product") Product product, @RequestParam(value = "menu", required = false ) String menu)
 			throws Exception {
 
 		System.out.println("/updateProduct");
 
-		//System.out.println("update menu Check" + menu);
+		System.out.println("update menu Check" + menu);
+		
+		System.out.println("product......" + product);
 
 		product.setManuDate(product.getManuDate().replaceAll("-", ""));
 
@@ -198,7 +200,7 @@ public class ProductController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/product/updateProduct.jsp");
 		modelAndView.addObject("product", product);
-		//modelAndView.addObject("menu", menu);
+		modelAndView.addObject("menu", menu);
 
 		return modelAndView;
 	}
