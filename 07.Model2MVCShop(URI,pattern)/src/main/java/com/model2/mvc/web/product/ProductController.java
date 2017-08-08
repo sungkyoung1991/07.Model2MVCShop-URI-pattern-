@@ -1,23 +1,17 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.fileupload.DiskFileUpload;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.model2.mvc.common.Page;
@@ -68,7 +62,7 @@ public class ProductController {
 		return modelAndView;
 	}*/
 	
-	@RequestMapping("addProduct")
+	/*@RequestMapping("addProduct")
 	public ModelAndView addProduct(@ModelAttribute("product") Product product,
 									HttpServletRequest request)
 			throws Exception {
@@ -139,22 +133,43 @@ public class ProductController {
 
 		return modelAndView;
 	}
-
-	/*@RequestMapping(value = "addProduct", method = RequestMethod.POST)
-	public ModelAndView addProduct(@ModelAttribute("product") Product product, MultipartFile file)
+*/
+	@RequestMapping(value = "addProduct", method = RequestMethod.POST)
+	public ModelAndView addProduct(@ModelAttribute("product") Product product, 
+									@RequestParam("file") MultipartFile file)
 			throws Exception {
 
 
 		System.out.println("/addProduct");
 		
-		System.out.println("file check ........" + file);
+		System.out.println("file check ........" + file.getOriginalFilename());
+		
+		System.out.println("product..........." + product);
+		
+		product.setManuDate(product.getManuDate().replaceAll("-", ""));
+		
+		String temDir = "/Users/sungkyoung-kim/git/07.Model2MVCShop(URI,pattern)/"
+				+ "07.Model2MVCShop(URI,pattern)/WebContent/images/uploadFiles";
+		
+		File UploadedFile = new File(temDir, file.getOriginalFilename());
+		
+		System.out.println("uploadFile :  " + UploadedFile);
+		
+		product.setFileName(file.getOriginalFilename());
+		
+		file.transferTo(UploadedFile);
+		
+		System.out.println("filename check..........."+product.getFileName());
 
 		ModelAndView modelAndView = new ModelAndView();
 		productService.addProduct(product);
+		modelAndView.setViewName("forward:/product/addProduct.jsp");
+		modelAndView.addObject(product);
+		
 		return modelAndView;
 
 		
-	}*/
+	}
 
 	
 	
