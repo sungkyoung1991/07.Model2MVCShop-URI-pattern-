@@ -61,7 +61,7 @@
 		<td width="104" class="ct_write">상품명</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<a href="/getProduct?prodNo="${product.prodNo }">${product.prodName }</a>
+			<a href="/product/getProduct?prodNo="${product.prodNo }">${product.prodName }</a>
 		</td>
 	</tr>
 	
@@ -170,7 +170,7 @@
 						<a href="javascript:history.go(-1);">확인</a>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
-					<a href="/updatePurchaseView?prodNo=${product.prodNo}&tranNo=${purchase.tranNo}">수정</a>
+					<a href="/purchase/updatePurchaseView?prodNo=${product.prodNo}&tranNo=${purchase.tranNo}">수정</a>
 				</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif"width="14" height="23"/>

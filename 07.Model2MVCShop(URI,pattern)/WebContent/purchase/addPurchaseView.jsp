@@ -24,7 +24,7 @@
 
 <body>
 
-	<form name="addPurchase" method="post" action="/addPurchase">
+	<form name="addPurchase" method="post" action="/purchase/addPurchase">
 	
 	
 

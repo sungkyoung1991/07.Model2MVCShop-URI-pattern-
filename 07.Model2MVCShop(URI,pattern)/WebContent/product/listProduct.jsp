@@ -23,7 +23,7 @@
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="/listProduct?menu=${param.menu}" method="post">
+<form name="detailForm" action="/product/listProduct?menu=${param.menu}" method="post">
 
 
 
@@ -128,7 +128,7 @@
 		<td></td>
 		<td align="left">
 		<c:if test="${product.proTranCode==null}">	
-		<a href="/getProduct?prodNo=${product.prodNo}&menu=${param.menu}">${product.prodName}</a>
+		<a href="/product/getProduct?prodNo=${product.prodNo}&menu=${param.menu}">${product.prodName}</a>
 		</c:if>		
 		<c:if test="${product.proTranCode!=null}">	
 		${product.prodName}
@@ -162,7 +162,7 @@
 		
 		<c:if test="${product.proTranCode=='1  '}">
 			<c:if test="${param.menu=='manage' }">
-		<a href="/updateTranCode?prodNo=${product.prodNo}&menu=${param.menu}&tranCode=${product.proTranCode}">상품배송하기</a>
+		<a href="/purchase/updateTranCode?prodNo=${product.prodNo}&menu=${param.menu}&tranCode=${product.proTranCode}">상품배송하기</a>
 			</c:if>
 		</c:if>
 		

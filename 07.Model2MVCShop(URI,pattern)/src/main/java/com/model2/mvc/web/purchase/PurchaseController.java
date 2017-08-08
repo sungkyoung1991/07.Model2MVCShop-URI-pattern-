@@ -28,6 +28,7 @@ import com.model2.mvc.service.user.UserService;
 
 //==> 회원관리 Controller
 @Controller
+@RequestMapping("/purchase/*")
 public class PurchaseController {
 
 	/// Field
@@ -59,7 +60,7 @@ public class PurchaseController {
 	@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 
-	@RequestMapping("/addPurchaseView")
+	@RequestMapping("addPurchaseView")
 
 	public String addPurchaseView(@ModelAttribute("purchase") Purchase purchase, @RequestParam("prodNo") int prodNo,
 			Model model) throws Exception {
@@ -77,7 +78,7 @@ public class PurchaseController {
 
 	}
 
-	@RequestMapping("/addPurchase")
+	@RequestMapping("addPurchase")
 	public String addPurchase(@ModelAttribute("purchase") Purchase purchase, @RequestParam("prodNo") int prodNo,
 			@RequestParam("buyerId") String buyerId, Model model) throws Exception {
 
@@ -98,14 +99,14 @@ public class PurchaseController {
 		return "forward:/purchase/addPurchase.jsp";
 	}
 
-	@RequestMapping("/getPurchase")
+	@RequestMapping("getPurchase")
 	public String getPurchase(@RequestParam("tranNo") int tranNo, // @RequestParam("prodNo")
 																	// int
 																	// prodNo,
 			// @RequestParam("menu") String menu,
 			Model model) throws Exception {
 
-		System.out.println("/getPurchase");
+		System.out.println("getPurchase");
 
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 
@@ -116,7 +117,7 @@ public class PurchaseController {
 
 	}
 
-	@RequestMapping("/updatePurchaseView")
+	@RequestMapping("updatePurchaseView")
 	public String updatePurchaseView(@RequestParam("tranNo") int tranNo, Model model) throws Exception {
 
 		System.out.println("/updatePurchaseView");
@@ -128,7 +129,7 @@ public class PurchaseController {
 		return "forward:/purchase/updatePurchaseView.jsp";
 	}
 
-	@RequestMapping("/updatePurchase")
+	@RequestMapping("updatePurchase")
 	public String updatePurchase(@ModelAttribute("purchase") Purchase purchase, @RequestParam("tranNo") int tranNo,
 			HttpServletRequest request, Model model) throws Exception {
 
@@ -148,7 +149,7 @@ public class PurchaseController {
 		return "forward:/purchase/updatePurchase.jsp";
 	}
 
-	@RequestMapping("/listPurchase")
+	@RequestMapping("listPurchase")
 	public String getPurchaseList(@ModelAttribute("search") Search search, @ModelAttribute("page") Page page,
 			HttpServletRequest request, Model model) throws Exception {
 
@@ -174,7 +175,7 @@ public class PurchaseController {
 		return "forward:/purchase/listPurchase.jsp?menu=search";
 	}
 
-	@RequestMapping("/updateTranCode")
+	@RequestMapping("updateTranCode")
 	public String updateTranCode(@ModelAttribute("purchase") Purchase purchase,
 			@RequestParam("tranCode") String tranCode, @RequestParam("prodNo") int prodNo,
 			@RequestParam("menu") String menu, Model model) throws Exception {
@@ -203,9 +204,9 @@ public class PurchaseController {
 		//model.addAttribute("product", product);
 
 		if (menu.equals("manage")) {
-			return "forward:listProduct?menu=manage";
+			return "forward:/product/listProduct?menu=manage";
 		} else {
-			return "forward:listPurchase";
+			return "forward:/purchase/listPurchase";
 		}
 
 	}

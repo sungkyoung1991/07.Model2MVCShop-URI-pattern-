@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,6 +27,7 @@ import com.model2.mvc.service.product.ProductService;
 
 //==> 회원관리 Controller
 @Controller
+@RequestMapping("/product/*")
 public class ProductController {
 
 	/// Field
@@ -68,8 +68,9 @@ public class ProductController {
 		return modelAndView;
 	}*/
 	
-	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
-	public ModelAndView addProduct(@ModelAttribute("product") Product product, HttpServletRequest request)
+	@RequestMapping("addProduct")
+	public ModelAndView addProduct(@ModelAttribute("product") Product product,
+									HttpServletRequest request)
 			throws Exception {
 
 
@@ -139,10 +140,26 @@ public class ProductController {
 		return modelAndView;
 	}
 
+	/*@RequestMapping(value = "addProduct", method = RequestMethod.POST)
+	public ModelAndView addProduct(@ModelAttribute("product") Product product, MultipartFile file)
+			throws Exception {
+
+
+		System.out.println("/addProduct");
+		
+		System.out.println("file check ........" + file);
+
+		ModelAndView modelAndView = new ModelAndView();
+		productService.addProduct(product);
+		return modelAndView;
+
+		
+	}*/
+
 	
 	
 
-	@RequestMapping("/getProduct")
+	@RequestMapping("getProduct")
 	public ModelAndView getProduct(@RequestParam("menu") String menu, @RequestParam("prodNo") int prodNo)
 			throws Exception {
 
@@ -168,7 +185,7 @@ public class ProductController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/updateProductView")
+	@RequestMapping("updateProductView")
 	public ModelAndView updateProductView(@RequestParam("prodNo") int prodNo) throws Exception {
 
 		System.out.println("/updateProductView");
@@ -182,7 +199,7 @@ public class ProductController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/updateProduct")
+	@RequestMapping("updateProduct")
 	public ModelAndView updateProduct(@ModelAttribute("product") Product product, @RequestParam(value = "menu", required = false ) String menu)
 			throws Exception {
 
@@ -205,7 +222,7 @@ public class ProductController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/listProduct")
+	@RequestMapping("listProduct")
 	public ModelAndView getProductList(@ModelAttribute("search") Search search, @ModelAttribute("page") Page page)
 			throws Exception {
 

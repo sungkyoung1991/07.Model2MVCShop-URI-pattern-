@@ -41,7 +41,7 @@ function fncAddProduct(){
 		return;
 	}
 		
-	document.detailForm.action='/updateProduct';
+	document.detailForm.action='/product/updateProduct';
 	document.detailForm.submit();
 }
 
@@ -78,7 +78,7 @@ function fncAddProduct(){
 	<tr>
 		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
 	</tr>
-	${param.menu }
+	
 	<tr>
 		<td width="104" class="ct_write">
 			ªÛ«∞∏Ì <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>

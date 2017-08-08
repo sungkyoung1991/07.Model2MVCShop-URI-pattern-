@@ -128,14 +128,14 @@
 
 							<td background="/images/ct_btnbg02.gif" class="ct_btn01"
 								style="padding-top: 3px;"><a
-								href="/addPurchaseView?prodNo=${product.prodNo }">구매</a></td>
+								href="/purchase/addPurchaseView?prodNo=${product.prodNo }">구매</a></td>
 								<!-- <input type="submit" name="submit" value="구매"/> -->
 								
 							<td width="14" height="23"><img src="/images/ct_btnbg03.gif"
 								width="14" height="23" />
 							<td background="/images/ct_btnbg02.gif" class="ct_btn01"
 								style="padding-top: 3px;"><a
-								href="/listProduct?menu=${param.menu}">확인</a></td>
+								href="/product/listProduct?menu=${param.menu}">확인</a></td>
 							<td width="14" height="23"><img src="/images/ct_btnbg03.gif"
 								width="14" height="23" /></td>
 						</tr>

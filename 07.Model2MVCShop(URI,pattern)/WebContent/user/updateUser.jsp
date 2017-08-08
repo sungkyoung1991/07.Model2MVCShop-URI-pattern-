@@ -25,7 +25,7 @@ function fncUpdateUser() {
 		document.detailForm.phone.value = "";
 	}
 		
-	document.detailForm.action='/updateUser';
+	document.detailForm.action='/user/updateUser';
 	document.detailForm.submit();
 }
 
